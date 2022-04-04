@@ -15,11 +15,7 @@ class Food:
 		
 		self.position: randint(0,8), randint(0,8)
 			
-	def eat(self, condition, disappearance)
-	
-		If snake[0] == food
-			food = ()
-			
+
 	def get_random_position(self, snake_pos: list[Point]):
 		possible_points = [Point(0,0), (0,1), (0,2), (0,3), (0,4), (0,5), (0,6), (0,7),
 				  (1,0), (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7),
