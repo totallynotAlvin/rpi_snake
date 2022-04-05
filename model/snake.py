@@ -9,16 +9,17 @@ class Snake:
         self.direction: Direction = Direction.RIGHT
 
         mid_point = Point(width // 2, height // 2)
-        mid_point = Point(4, 4)
+        # mid_point = Point(4, 4)
         self.positions: deque[Point] = deque([mid_point])
 
     def get_head_position(self) -> Point:
         return self.positions[0]
 
     def turn(self, new_direction: Direction) -> None:
-        opposite = (new_direction.value.x * -1, new_direction.value.y * -1)
+        opposite = Point(new_direction.value.x * -1, new_direction.value.y * -1)
 
-        if self.length == 1 or opposite != self.direction:
+        if self.length == 1 or opposite != self.direction.value:
+            print(f"valid turn, cond1: {self.length ==1}, cond2: {opposite != self.direction}")
             self.direction = new_direction
 
     def move(self, grow: bool = False) -> None:

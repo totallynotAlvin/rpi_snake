@@ -8,8 +8,8 @@ speed = 2
 clock = pygame.time.Clock()
 
 # Window size
-window_x = 800
-window_y = 800
+window_x = 8
+window_y = 8
 
 # defining colors
 black = pygame.Color(0, 0, 0)
@@ -29,7 +29,7 @@ def game_over():
 pygame.init()
 
 # Initialise game window
-window = pygame.display.set_mode((window_x, window_y))
+window = pygame.display.set_mode((window_x*100, window_y*100))
 
 snake = snake.Snake(window_x, window_y)
 food = food.Food(window_x, window_y)
@@ -38,9 +38,11 @@ is_running = True
 
 while is_running:
 
-    if snake_position[0] >= window_x or snake_position[0] <= 0: 
+    snake_head = snake.get_head_position()
+
+    if snake_head.x >= window_x or snake_head.x <= 0: 
         game_over()
-    elif snake_position[1] >= window_y or snake_position[1] <= 0:
+    elif snake_head.y >= window_y or snake_head.y <= 0:
         game_over()
     
     for event in pygame.event.get():
@@ -65,15 +67,15 @@ while is_running:
 
     snake.move(grow=grow)
 
-    game_window.fill(black)
+    window.fill(black)
 
     pygame.draw.rect(
-        game_window, red, pygame.Rect(
+        window, red, pygame.Rect(
             food.position.x*100, food.position.y*100, 100, 100))
 
     for curr in snake.positions:
         pygame.draw.rect(
-            game_window, green, pygame.Rect(
+            window, green, pygame.Rect(
                 curr.x*100, curr.y*100, 100, 100))
 
     # clock ticker
