@@ -3,7 +3,7 @@ import pygame
 
 
 # initialize speed
-snake_speed = 15
+speed = 10
 clock = pygame.time.Clock()
 
 # Window size
@@ -27,8 +27,9 @@ def game_over():
 pygame.init()
 
 # Initialise game window
-game_window = pygame.display.set_mode((window_x, window_y))
+window = pygame.display.set_mode((window_x, window_y))
 
+# Key variables
 snake_position = [100, 50]
 snake_body = [[100, 100], [90, 100], [80, 100], [70, 100]]
 
@@ -37,7 +38,7 @@ change_to = direction
 is_running = True
 
 while is_running:
-    # handling key events
+    # Key Events
     pygame.time.delay(50)
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -51,6 +52,7 @@ while is_running:
                 change_to = 'RIGHT'
             if event.key == pygame.K_1:
                 is_running = False
+
 # Checks whether the input is illegal
     if change_to == 'UP' and direction != 'DOWN':
         direction = 'UP'
@@ -71,14 +73,17 @@ while is_running:
     if direction == 'RIGHT':
         snake_position[0] += 10
 
-    game_window.fill(black)
+    window.fill(black)
+    # updates snake positions
     snake_body.insert(0, list(snake_position))
     snake_body.pop()
 
-    for pos in snake_body:
+    # draws snake position
+    for block in snake_body:
         pygame.draw.rect(
-            game_window, green, pygame.Rect(
-                pos[0], pos[1], 10, 10))
+            window, green, pygame.Rect(
+                block[0], block[1], 10, 10))
 
+    # clock ticker
     pygame.display.update()
-    clock.tick(snake_speed)
+    clock.tick(speed)
