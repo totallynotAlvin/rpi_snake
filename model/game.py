@@ -30,7 +30,7 @@ pygame.init()
 window = pygame.display.set_mode((window_x, window_y))
 
 # Key variables
-snake_position = [100, 50]
+snake_position = [100, 100]
 snake_body = [[100, 100], [90, 100], [80, 100], [70, 100]]
 
 direction = 'RIGHT'
@@ -40,6 +40,11 @@ is_running = True
 while is_running:
     # Key Events
     pygame.time.delay(50)
+    if snake_position[0] >= window_x or snake_position[0] <= 0: 
+        game_over()
+    elif snake_position[1] >= window_y or snake_position[1] <= 0:
+        game_over()
+    
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
