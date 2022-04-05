@@ -4,7 +4,7 @@ import food
 from util import Direction
 
 # initialize speed
-snake_speed = 2
+speed = 2
 clock = pygame.time.Clock()
 
 # Window size
@@ -29,7 +29,7 @@ def game_over():
 pygame.init()
 
 # Initialise game window
-game_window = pygame.display.set_mode((window_x, window_y))
+window = pygame.display.set_mode((window_x, window_y))
 
 snake = snake.Snake(window_x, window_y)
 food = food.Food(window_x, window_y)
@@ -37,8 +37,12 @@ food = food.Food(window_x, window_y)
 is_running = True
 
 while is_running:
-    # handling key events
-    # pygame.time.delay(50)
+
+    if snake_position[0] >= window_x or snake_position[0] <= 0: 
+        game_over()
+    elif snake_position[1] >= window_y or snake_position[1] <= 0:
+        game_over()
+    
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
@@ -72,5 +76,6 @@ while is_running:
             game_window, green, pygame.Rect(
                 curr.x*100, curr.y*100, 100, 100))
 
+    # clock ticker
     pygame.display.update()
-    clock.tick(snake_speed)
+    clock.tick(speed)
