@@ -6,7 +6,7 @@ import random
 class Food:
     def __init__(self, width: int, height: int):
         self.color: Color = Color(255, 0, 0)  # Red
-        self.position: Point = Point(1, 1)  # TODO: Randomize this
+        self.position: Point = Point(1, 1) 
 
         self.all_points: list(Point) = []
         for x in range(width):
